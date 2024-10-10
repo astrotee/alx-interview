@@ -4,6 +4,8 @@
 
 def canUnlockAll(boxes: list):
     "check if all boxes are reachable"
+    if len(boxes) == 0:
+        return True
     unvisited = set(range(1, len(boxes)))
     dfs(boxes[0], boxes, unvisited)
     return len(unvisited) == 0
