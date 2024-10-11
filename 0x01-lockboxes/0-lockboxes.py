@@ -13,6 +13,8 @@ def canUnlockAll(boxes: list):
 
 def dfs(box: list, boxes: list, unvisited: set):
     "do a dfs on boxes"
+    if len(unvisited) == 0:
+        return
     for key in box:
         if key in unvisited and key in range(1, len(boxes)):
             unvisited.remove(key)
