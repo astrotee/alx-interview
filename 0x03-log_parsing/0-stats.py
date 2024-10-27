@@ -51,5 +51,5 @@ if __name__ == "__main__":
         if count == 10:
             report()
             count = 0
-    else:
+    if 10 - count > 0:
         report()
