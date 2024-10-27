@@ -23,7 +23,12 @@ def report():
     file_size = 0
 
 
-signal.signal(signal.SIGINT, lambda num, frame: report())
+def handler(signum, frame):
+    report()
+    raise KeyboardInterrupt
+
+
+signal.signal(signal.SIGINT, handler)
 
 
 if __name__ == "__main__":
@@ -39,3 +44,5 @@ if __name__ == "__main__":
         if count == 10:
             report()
             count = 0
+    else:
+        report()
