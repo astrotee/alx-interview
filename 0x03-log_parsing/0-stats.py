@@ -7,7 +7,14 @@ import re
 
 count = 0
 file_size = 0
-status_count = {c: 0 for c in ['200', '301', '400', '401', '403', '404', '405', '500']}
+status_count = {c: 0 for c in ['200', '301', '400', '401',
+                               '403', '404', '405', '500']}
+pattern = (
+    r'(?P<ip>(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}'
+    r'(?:25[0-5]|2[0-4]\d|[01]?\d\d?))'
+    r' - \[(?P<date>.+)\] "GET /projects/260 HTTP/1.1"'
+    r' (?P<status>200|301|400|401|403|404|405|500) (?P<size>\d+)'
+)
 
 
 def report():
@@ -32,7 +39,7 @@ signal.signal(signal.SIGINT, handler)
 
 
 if __name__ == "__main__":
-    pattern = re.compile(r'(?P<ip>(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)) - \[(?P<date>.+)\] "GET /projects/260 HTTP/1.1" (?P<status>200|301|400|401|403|404|405|500) (?P<size>\d+)')
+    pattern = re.compile(pattern)
 
     for line in sys.stdin:
         match = pattern.fullmatch(line.strip())
