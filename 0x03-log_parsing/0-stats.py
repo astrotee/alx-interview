@@ -26,11 +26,10 @@ def report():
         if count == 0:
             continue
         print(f'{code}: {count}')
-        status_count[code] = 0
-    file_size = 0
 
 
 def handler(signum, frame):
+    "SIGINT handler"
     report()
     raise KeyboardInterrupt
 
